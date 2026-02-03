@@ -1,7 +1,25 @@
 {
+  "name": "botia-monorepo",
+  "version": "1.0.0",
+  "description": "SaaS Multi-Tenant WhatsApp CRM/ERP",
+  "workspaces": [
+    "apps/backend",
+    "apps/frontend"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace=apps/backend",
+    "start": "npm start --workspace=apps/backend",
+    "start:dev": "npm run start:dev --workspace=apps/backend",
+    "start:prod": "npm start --workspace=apps/backend",
+    "prisma:generate": "npx prisma generate",
+    "prisma:migrate": "npx prisma migrate dev",
+    "prisma:studio": "npx prisma studio"
+  },
   "dependencies": {
     "@prisma/client": "^5.19.0",
     "@prisma/internals": "^5.19.0",
-    "dotenv": "^17.2.3"
-  }
+    "dotenv": "^17.2.3",
+    "prisma": "^5.19.0"
+  },
+  "devDependencies": {}
 }
