@@ -30,7 +30,7 @@ import { NotificationModule } from './modules/notification/notification.module';
     BullQueueModule,
     TenantModule,
     IAModule,
-    WhatsAppModule,
+    // WhatsAppModule, // TODO: Schema missing whatsappId field
     KnowledgeModule,
     AutomationModule,
     WordPressModule,
