@@ -1,46 +1,24 @@
 #!/usr/bin/env python3
 import paramiko
 
-host = '46.202.147.151'
-user = 'root'
-password = '2705#Data2705'
+HOST = "46.202.147.151"
+USER = "root"
+PASSWORD = "2705#Data2705"
 
-ssh = paramiko.SSHClient()
-ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-ssh.connect(host, username=user, password=password, timeout=30)
+def ssh(cmd):
+    client = paramiko.SSHClient()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    client.connect(HOST, username=USER, password=PASSWORD, timeout=30)
+    stdin, stdout, stderr = client.exec_command(cmd, timeout=120)
+    out = stdout.read().decode('utf-8', errors='ignore')
+    client.close()
+    return out
 
-print("="*60)
-print("VERIFICAÇÃO DO BACKEND")
-print("="*60)
+# Ver logs do backend
+print("\n[LOGS DO BACKEND]")
+out = ssh("pm2 logs backend --lines 50 2>&1")
+print(out[:1000])
 
-# Status
-print("\n📋 Status do container:")
-stdin, stdout, stderr = ssh.exec_command('docker ps -a | grep botia-backend')
-status = stdout.read().decode().strip()
-print(status if status else "Sem containers")
-
-# Logs detalhados
-print("\n📜 Logs completos do container:")
-stdin, stdout, stderr = ssh.exec_command('docker logs botia-backend 2>&1')
-logs = stdout.read().decode()
-print(logs)
-
-# Análise
-print("\n" + "="*60)
-print("ANÁLISE:")
-print("="*60)
-
-if 'Listening' in logs or 'listening' in logs:
-    print("✅ Backend está RODANDO!")
-elif 'PrismaClientInitializationError' in logs:
-    print("❌ Ainda tem erro de Prisma")
-elif 'Cannot find module' in logs:
-    print("❌ Erro de módulo")
-elif 'Exited' in status:
-    print("❌ Container foi finalizado - verificar logs acima")
-elif 'Created' in status:
-    print("⏳ Container ainda iniciando...")
-else:
-    print("❓ Status desconhecido - verificar logs acima")
-
-ssh.close()
+print("\n[HEALTH CHECK]")
+out = ssh("curl -s http://localhost:3000/health 2>/dev/null || echo 'Nao conectado'")
+print(out[:300])

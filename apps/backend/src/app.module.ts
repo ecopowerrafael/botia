@@ -38,9 +38,9 @@ import { NotificationModule } from './modules/notification/notification.module';
     OnboardingModule,
     CartModule,
     PaymentModule,
-    AudioModule,
+    // AudioModule, // TODO: Corrigir schema (audioPath, provider faltando)
     IntentModule,
-    TTSModule,
+    // TTSModule, // TODO: Corrigir schema (audioPath, provider faltando)
     ConversationModule,
     NotificationModule,
   ],
