@@ -36,8 +36,8 @@ import { NotificationModule } from './modules/notification/notification.module';
     WordPressModule,
     UserModule,
     OnboardingModule,
-    CartModule,
-    PaymentModule,
+    // CartModule, // TODO: Fix Order schema relation
+    // PaymentModule, // TODO: Fix Order schema - missing total field reference
     // AudioModule, // TODO: Corrigir schema (audioPath, provider faltando)
     IntentModule,
     // TTSModule, // TODO: Corrigir schema (audioPath, provider faltando)
