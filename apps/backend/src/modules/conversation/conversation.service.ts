@@ -60,10 +60,10 @@ export class ConversationService {
           await this.cartService.addItem({
             tenantId: this.extractTenantId(chatId),
             chatId,
+            contactId: chatId, // Use chatId as contactId
             productName: item.productName,
             quantity: item.quantity,
-            price: 0, // será preenchido pelo frontend
-            productId: this.findProductId(item.productName),
+            unitPrice: 0, // será preenchido pelo frontend
           });
           cartItemsAdded.push(item);
         } catch (error) {
@@ -196,7 +196,7 @@ export class ConversationService {
     });
     const recentIntents = recentMessages
       .map((m: any) => m.intent)
-      .filter((i) => i);
+      .filter((i: any) => i);
 
     // Sugestões de próximas ações
     const suggestedNextActions = this.generateSuggestions(

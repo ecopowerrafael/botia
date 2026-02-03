@@ -5,29 +5,13 @@ export declare class WhatsAppController {
     private readonly logger;
     constructor(whatsappService: WhatsAppService);
     createInstance(dto: CreateInstanceDto): Promise<{
-        instance: {
-            id: string;
-            name: string;
-            createdAt: Date;
-            updatedAt: Date;
-            tenantId: string;
-            status: string;
-            instanceKey: string;
-        };
+        instance: any;
         qrcode: any;
         instanceKey: string;
     }>;
     connectInstance(dto: ConnectInstanceDto): Promise<{
         status: string;
-        instance: {
-            id: string;
-            name: string;
-            createdAt: Date;
-            updatedAt: Date;
-            tenantId: string;
-            status: string;
-            instanceKey: string;
-        };
+        instance: any;
         message?: undefined;
     } | {
         status: string;
@@ -37,24 +21,8 @@ export declare class WhatsAppController {
     disconnectInstance(dto: DisconnectInstanceDto): Promise<{
         status: string;
     }>;
-    listInstances(tenantId: string): Promise<{
-        id: string;
-        name: string;
-        createdAt: Date;
-        updatedAt: Date;
-        tenantId: string;
-        status: string;
-        instanceKey: string;
-    }[]>;
-    getInstance(tenantId: string, instanceKey: string): Promise<{
-        id: string;
-        name: string;
-        createdAt: Date;
-        updatedAt: Date;
-        tenantId: string;
-        status: string;
-        instanceKey: string;
-    } | null>;
+    listInstances(tenantId: string): Promise<any>;
+    getInstance(tenantId: string, instanceKey: string): Promise<any>;
     sendMessage(dto: SendMessageDto): Promise<{
         success: boolean;
         messageId: any;

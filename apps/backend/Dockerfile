@@ -10,15 +10,19 @@ COPY apps/backend/tsconfig.json ./apps/backend/
 COPY apps/backend/tsconfig.build.json ./apps/backend/
 COPY apps/backend/nest-cli.json ./apps/backend/
 
-# Install all dependencies (including dev for build)
+# Install dependencies in backend
+WORKDIR /app/apps/backend
 RUN npm ci
+WORKDIR /app
 
 # Copy source code
 COPY apps/backend/src ./apps/backend/src
 COPY prisma ./prisma
 
 # Build application
+WORKDIR /app/apps/backend
 RUN npm run build
+WORKDIR /app
 
 # Production stage - Minimal runtime image
 FROM node:22-alpine

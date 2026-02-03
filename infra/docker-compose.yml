@@ -48,7 +48,7 @@ services:
 
   # Evolution API - WhatsApp Integration
   evolution-api:
-    image: ghcr.io/evolution-api/whatsapp:latest
+    image: evoapicloud/evolution-api:latest
     container_name: app-evolution-api
     restart: unless-stopped
     environment:

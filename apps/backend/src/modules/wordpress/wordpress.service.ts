@@ -337,7 +337,7 @@ export class WordPressService {
       orderBy: { syncedAt: 'desc' },
     });
 
-    return products.map((p) => ({
+    return products.map((p: any) => ({
       name: p.name,
       price: p.price,
       description: p.description,

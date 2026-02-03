@@ -7,7 +7,7 @@ import {
   TranscriptionResultDto,
   AudioListDto,
 } from './dto/audio.dto';
-import { AudioStatus } from '@prisma/client';
+import { AudioStatus } from '../../shared/enums';
 import axios from 'axios';
 
 /**
@@ -203,7 +203,7 @@ export class AudioService {
 
     return {
       chatId,
-      audioMessages: audioMessages.map((am) => this.mapToResponseDto(am)),
+      audioMessages: audioMessages.map((am: any) => this.mapToResponseDto(am)),
       totalCount: audioMessages.length,
       lastUpdated: new Date(),
     };

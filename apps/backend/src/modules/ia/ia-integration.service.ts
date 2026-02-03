@@ -104,10 +104,10 @@ export class IAIntegrationService {
           await this.cartService.addItem({
             tenantId,
             chatId,
+            contactId: chatId,
             productName: item.productName,
             quantity: item.quantity,
-            price: 0,
-            productId: `product-${item.productName.toLowerCase().replace(/\s+/g, '-')}`,
+            unitPrice: 0,
           });
           cartItemsAdded.push(item);
         } catch (error) {

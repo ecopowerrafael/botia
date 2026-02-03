@@ -184,7 +184,7 @@ export class AutomationService {
       this.prisma.schedule.update({
         where: { id: scheduleId },
         data: { status: 'COMPLETED' as any },
-      }).catch((err) => this.logger.error(`Error updating schedule: ${err.message}`));
+      }).catch((err: any) => this.logger.error(`Error updating schedule: ${err.message}`));
       return null;
     }
 

@@ -107,16 +107,6 @@ export class TTSService {
   }
 
   /**
-   * Obter TTS em cache se disponível
-   */
-  async getCachedTTS(dto: GetCachedTTSDto): Promise<any | null> {
-    const { text, language = 'pt' } = dto;
-    const textHash = this.hashText(text, language, 'pt-br-female');
-
-    return await this.getCachedTTS(textHash);
-  }
-
-  /**
    * Listar itens em cache
    */
   async listCache(): Promise<ListCacheResponseDto> {
@@ -130,7 +120,7 @@ export class TTSService {
 
     return {
       total: items.length,
-      cached: items.map((item) => ({
+      cached: items.map((item: any) => ({
         id: item.id,
         text: item.originalText,
         language: item.language,
@@ -231,7 +221,7 @@ export class TTSService {
       responseAudioUrl,
       responseAudioDuration,
       cartItemsAdded: dto.cartItems,
-      nextStep: this.suggestNextStep(intent, responseText),
+      nextStep: this.suggestNextStep(intent, responseText || 'Entendi sua mensagem!'),
       message: 'Resposta processada com sucesso',
     };
   }

@@ -9,83 +9,28 @@ export declare class KnowledgeService {
     scrapeUrl(dto: ScrapeUrlDto): Promise<{
         success: boolean;
         count: number;
-        products: {
-            id: string;
-            name: string;
-            createdAt: Date;
-            updatedAt: Date;
-            price: number | null;
-            tenantId: string;
-            stock: number | null;
-            url: string | null;
-            category: string;
-            metadata: import("@prisma/client/runtime/client").JsonValue | null;
-        }[];
+        products: any[];
     }>;
     scrapeDynamicUrl(dto: ScrapeUrlDto): Promise<{
         success: boolean;
         count: number;
-        products: {
-            id: string;
-            name: string;
-            createdAt: Date;
-            updatedAt: Date;
-            price: number | null;
-            tenantId: string;
-            stock: number | null;
-            url: string | null;
-            category: string;
-            metadata: import("@prisma/client/runtime/client").JsonValue | null;
-        }[];
+        products: any[];
     }>;
     uploadCsv(tenantId: string, filePath: string, dto: UploadCsvDto): Promise<{
         success: boolean;
         count: number;
-        products: {
-            id: string;
-            name: string;
-            createdAt: Date;
-            updatedAt: Date;
-            price: number | null;
-            tenantId: string;
-            stock: number | null;
-            url: string | null;
-            category: string;
-            metadata: import("@prisma/client/runtime/client").JsonValue | null;
-        }[];
+        products: any[];
     }>;
-    listProducts(tenantId: string, category?: string, limit?: number, offset?: number): Promise<{
-        id: string;
-        name: string;
-        createdAt: Date;
-        updatedAt: Date;
-        price: number | null;
-        tenantId: string;
-        stock: number | null;
-        url: string | null;
-        category: string;
-        metadata: import("@prisma/client/runtime/client").JsonValue | null;
-    }[]>;
-    countProducts(tenantId: string, category?: string): Promise<number>;
-    searchProducts(tenantId: string, query: string, limit?: number): Promise<{
-        id: string;
-        name: string;
-        createdAt: Date;
-        updatedAt: Date;
-        price: number | null;
-        tenantId: string;
-        stock: number | null;
-        url: string | null;
-        category: string;
-        metadata: import("@prisma/client/runtime/client").JsonValue | null;
-    }[]>;
+    listProducts(tenantId: string, category?: string, limit?: number, offset?: number): Promise<any>;
+    countProducts(tenantId: string, category?: string): Promise<any>;
+    searchProducts(tenantId: string, query: string, limit?: number): Promise<any>;
     deleteProduct(tenantId: string, productId: string): Promise<{
         success: boolean;
         message: string;
     }>;
     deleteProductsByCategory(tenantId: string, category: string): Promise<{
         success: boolean;
-        deletedCount: number;
+        deletedCount: any;
     }>;
     private parsePrice;
 }

@@ -1,0 +1,85 @@
+# 🔴 SOLUÇÃO MANUAL - SEM SCRIPTS
+
+Se os scripts não funcionarem, aqui estão os comandos individuais que você executa um de cada vez.
+
+## Passo 1: Conectar SSH
+```
+ssh root@46.202.147.151
+```
+Password: `2705#Data2705`
+
+---
+
+## Passo 2: Executar CADA UMA dessas linhas (uma por vez, aguarde terminar)
+
+```bash
+cd /var/www/botia
+```
+
+```bash
+docker stop botia-backend botia-postgres botia-redis 2>/dev/null || true
+```
+
+```bash
+docker rm botia-backend botia-postgres botia-redis 2>/dev/null || true
+```
+
+```bash
+docker run -d --name botia-postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=botia_db -p 5432:5432 -v postgres_data:/var/lib/postgresql/data postgres:15-alpine
+```
+
+**Aguarde 5 segundos, depois:**
+
+```bash
+docker run -d --name botia-redis -p 6379:6379 -v redis_data:/data redis:7-alpine
+```
+
+**Aguarde 3 segundos, depois:**
+
+```bash
+docker run -d --name botia-backend -p 3000:3000 -e NODE_ENV=production -e DATABASE_URL=postgresql://postgres:postgres@postgres:5432/botia_db -e REDIS_URL=redis://redis:6379 -w /app -v /var/www/botia:/app --link botia-postgres:postgres --link botia-redis:redis node:22-alpine sh -c "npm ci --omit=dev && node apps/backend/dist/main"
+```
+
+**Aguarde 15 segundos, depois verifique:**
+
+```bash
+docker ps -a
+```
+
+Você deve ver 3 containers com status "Up":
+- botia-postgres
+- botia-redis
+- botia-backend
+
+---
+
+## Passo 3: Verificar se funciona
+
+```bash
+curl http://localhost:3000/health
+```
+
+Se vir um JSON ou mensagem, está funcionando! ✅
+
+---
+
+## Passo 4: Ver logs se tiver erro
+
+```bash
+docker logs botia-backend | tail -50
+```
+
+---
+
+## Se ainda não funcionar:
+
+Compartilhe:
+1. Output de `docker ps -a`
+2. Output de `docker logs botia-backend`
+3. Output de `curl http://localhost:3000/health`
+
+---
+
+**IMPORTANTE**: Execute cada comando, aguarde terminar, e só depois execute o próximo.
+Não executa tudo de uma vez!
+

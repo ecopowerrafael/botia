@@ -72,7 +72,7 @@ export class NotificationService {
       // Passo 4: Enviar mensagem WhatsApp para vendedor
       const messageId = await this.sendWhatsAppMessage(
         instanceKey,
-        vendorConfig.vendorWhatsAppNumber,
+        vendorConfig.vendorPhoneNumber,
         message,
       );
 
@@ -81,7 +81,7 @@ export class NotificationService {
         try {
           await this.sendWhatsAppMedia(
             instanceKey,
-            vendorConfig.vendorWhatsAppNumber,
+            vendorConfig.vendorPhoneNumber,
             paymentProofUrl,
             'Comprovante de Pagamento',
           );
@@ -94,7 +94,7 @@ export class NotificationService {
       const buttonsMessage = this.buildVendorActionButtons(orderId);
       await this.sendWhatsAppMessage(
         instanceKey,
-        vendorConfig.vendorWhatsAppNumber,
+        vendorConfig.vendorPhoneNumber,
         buttonsMessage,
       );
 
@@ -103,14 +103,14 @@ export class NotificationService {
         tenantId,
         orderId,
         recipientType: 'VENDOR',
-        recipientPhone: vendorConfig.vendorWhatsAppNumber,
+        recipientPhone: vendorConfig.vendorPhoneNumber,
         messageType: 'PAYMENT_APPROVED',
         status: 'sent',
         messageId,
       });
 
       this.logger.log(
-        `Notificação de pagamento enviada para vendedor: ${vendorConfig.vendorWhatsAppNumber}`,
+        `Notificação de pagamento enviada para vendedor: ${vendorConfig.vendorPhoneNumber}`,
       );
 
       return {
@@ -229,15 +229,15 @@ export class NotificationService {
     const config = await this.prisma.tenantWhatsAppConfig.upsert({
       where: { tenantId },
       update: {
-        vendorWhatsAppNumber,
-        vendorWhatsAppName,
+        vendorPhoneNumber: vendorWhatsAppNumber,
+        vendorPhoneName: vendorWhatsAppName,
         vendorInstanceKey,
         updatedAt: new Date(),
       },
       create: {
         tenantId,
-        vendorWhatsAppNumber,
-        vendorWhatsAppName,
+        vendorPhoneNumber: vendorWhatsAppNumber,
+        vendorPhoneName: vendorWhatsAppName,
         vendorInstanceKey,
       },
     });
@@ -246,8 +246,8 @@ export class NotificationService {
       success: true,
       config: {
         tenantId: config.tenantId,
-        vendorWhatsAppNumber: config.vendorWhatsAppNumber,
-        vendorWhatsAppName: config.vendorWhatsAppName || 'Vendedor',
+        vendorWhatsAppNumber: config.vendorPhoneNumber,
+        vendorWhatsAppName: config.vendorPhoneName || 'Vendedor',
         createdAt: config.createdAt.toISOString(),
         updatedAt: config.updatedAt.toISOString(),
       },
@@ -257,12 +257,28 @@ export class NotificationService {
   /**
    * Obter configuração WhatsApp do vendor
    */
-  async getVendorWhatsAppConfig(
-    tenantId: string,
-  ): Promise<any> {
+  async getVendorWhatsAppConfig(tenantId: string): Promise<any> {
     return await this.prisma.tenantWhatsAppConfig.findUnique({
       where: { tenantId },
     });
+  }
+
+  /**
+   * Compatibilidade com NotificationController
+   */
+  async configureVendorWhatsApp(
+    dto: VendorWhatsAppConfigDto,
+  ): Promise<VendorWhatsAppConfigResponseDto> {
+    return this.saveVendorWhatsAppConfig(dto);
+  }
+
+  async getVendorConfig(tenantId: string): Promise<any> {
+    return this.getVendorWhatsAppConfig(tenantId);
+  }
+
+  async processVendorResponse(payload: any): Promise<any> {
+    this.logger.log('Processando resposta do vendedor', payload);
+    return { success: true };
   }
 
   /**

@@ -8,7 +8,7 @@ import {
   CartResponseDto,
   ConfirmResponseDto,
 } from './dto/cart.dto';
-import { OrderStatus, PaymentStatus } from '@prisma/client';
+import { OrderStatus, PaymentStatus } from '../../shared/enums';
 
 /**
  * CartService gerencia carrinho de compras

@@ -1,5 +1,5 @@
 import { IsEmail, IsString, IsEnum, IsOptional, MinLength } from 'class-validator';
-import { VendorMode } from '@prisma/client';
+import { VendorMode } from '../../../shared/enums';
 
 export class OnboardingSetupDto {
   @IsString()

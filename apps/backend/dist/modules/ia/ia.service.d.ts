@@ -9,44 +9,19 @@ export declare class IAService {
     private gemini;
     private ollamaUrl;
     constructor(prisma: PrismaService, wordPressService: WordPressService);
-    searchProducts(dto: SearchProductsDto): Promise<{
-        id: string;
-        name: string;
-        createdAt: Date;
-        updatedAt: Date;
-        price: number | null;
-        tenantId: string;
-        stock: number | null;
-        url: string | null;
-        category: string;
-        metadata: import("@prisma/client/runtime/client").JsonValue | null;
-    }[]>;
+    searchProducts(dto: SearchProductsDto): Promise<any>;
     processMessage(dto: ProcessMessageDto): Promise<{
         response: string;
-        products: {
-            id: string;
-            name: string;
-            createdAt: Date;
-            updatedAt: Date;
-            price: number | null;
-            tenantId: string;
-            stock: number | null;
-            url: string | null;
-            category: string;
-            metadata: import("@prisma/client/runtime/client").JsonValue | null;
-        }[];
+        products: any;
         provider: AIProvider;
     }>;
     private callOpenAI;
     private callGemini;
     private callOllama;
-    getConversationHistory(chatId: string, limit?: number): Promise<{
-        role: string;
-        content: string;
-    }[]>;
+    getConversationHistory(chatId: string, limit?: number): Promise<any>;
     getTenantIAConfig(tenantId: string): Promise<{
         tenantId: string;
-        hasOpenAI: boolean;
-        hasGemini: boolean;
+        hasOpenAI: any;
+        hasGemini: any;
     }>;
 }

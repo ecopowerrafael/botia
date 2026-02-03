@@ -1,5 +1,5 @@
 import { IsEmail, IsString, IsEnum, IsOptional, IsPhoneNumber, MinLength } from 'class-validator';
-import { UserRole, VendorMode } from '@prisma/client';
+import { UserRole, VendorMode } from '../../../shared/enums';
 
 export class UserCreateDto {
   @IsEmail()

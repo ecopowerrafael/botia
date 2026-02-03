@@ -5,12 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from './shared/prisma.module';
 import { BullQueueModule } from './shared/bull.module';
-import { QueueService } from './shared/queue.service';
 import { QueueSchedulerService } from './shared/queue-scheduler.service';
-import { QueueMonitoringController } from './shared/queue-monitoring.controller';
-import { AudioQueueProcessor } from './shared/processors/audio.processor';
-import { NotificationQueueProcessor } from './shared/processors/notification.processor';
-import { CleanupQueueProcessor } from './shared/processors/cleanup.processor';
 import { TenantModule } from './modules/tenant/tenant.module';
 import { IAModule } from './modules/ia/ia.module';
 import { WhatsAppModule } from './modules/whatsapp/whatsapp.module';
@@ -49,14 +44,10 @@ import { NotificationModule } from './modules/notification/notification.module';
     ConversationModule,
     NotificationModule,
   ],
-  controllers: [AppController, QueueMonitoringController],
+  controllers: [AppController],
   providers: [
     AppService,
-    QueueService,
     QueueSchedulerService,
-    AudioQueueProcessor,
-    NotificationQueueProcessor,
-    CleanupQueueProcessor,
   ],
 })
 export class AppModule {}

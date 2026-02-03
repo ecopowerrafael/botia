@@ -5,65 +5,25 @@ export declare class AutomationController {
     constructor(automationService: AutomationService);
     createDripCampaign(dto: CreateDripCampaignDto): Promise<{
         success: boolean;
-        schedule: {
-            id: string;
-            name: string;
-            createdAt: Date;
-            tenantId: string;
-            status: import("@prisma/client").$Enums.ScheduleStatus;
-            type: import("@prisma/client").$Enums.ScheduleType;
-            target: string;
-            payload: import("@prisma/client/runtime/client").JsonValue;
-            runAt: Date;
-        };
+        schedule: any;
     }>;
     createMassCampaign(dto: CreateMassCampaignDto): Promise<{
         success: boolean;
-        schedule: {
-            id: string;
-            name: string;
-            createdAt: Date;
-            tenantId: string;
-            status: import("@prisma/client").$Enums.ScheduleStatus;
-            type: import("@prisma/client").$Enums.ScheduleType;
-            target: string;
-            payload: import("@prisma/client/runtime/client").JsonValue;
-            runAt: Date;
-        };
+        schedule: any;
         totalContacts: number;
     }>;
-    listCampaigns(tenantId: string, type?: string, status?: string): Promise<{
-        id: string;
-        name: string;
-        createdAt: Date;
-        tenantId: string;
-        status: import("@prisma/client").$Enums.ScheduleStatus;
-        type: import("@prisma/client").$Enums.ScheduleType;
-        target: string;
-        payload: import("@prisma/client/runtime/client").JsonValue;
-        runAt: Date;
-    }[]>;
-    getCampaign(campaignId: string, tenantId: string): Promise<{
-        id: string;
-        name: string;
-        createdAt: Date;
-        tenantId: string;
-        status: import("@prisma/client").$Enums.ScheduleStatus;
-        type: import("@prisma/client").$Enums.ScheduleType;
-        target: string;
-        payload: import("@prisma/client/runtime/client").JsonValue;
-        runAt: Date;
-    }>;
+    listCampaigns(tenantId: string, type?: string, status?: string): Promise<any>;
+    getCampaign(campaignId: string, tenantId: string): Promise<any>;
     getCampaignStats(campaignId: string, tenantId: string): Promise<{
         campaignId: string;
-        type: import("@prisma/client").$Enums.ScheduleType;
-        name: string;
-        status: import("@prisma/client").$Enums.ScheduleStatus;
+        type: any;
+        name: any;
+        status: any;
         totalContacts: any;
         sentCount: any;
         failedCount: any;
         successRate: string;
-        createdAt: Date;
+        createdAt: any;
     }>;
     pauseCampaign(campaignId: string): Promise<{
         success: boolean;

@@ -1,8 +1,8 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { SchedulerRegistry } from '@nestjs/schedule';
 import { CronJob } from 'cron';
-import { Queue } from 'bull';
-import { InjectQueue } from '@nestjs/bull';
+import { Queue } from 'bullmq';
+import { InjectQueue } from '@nestjs/bullmq';
 
 /**
  * Scheduler Service
@@ -150,11 +150,11 @@ export class QueueSchedulerService implements OnModuleInit {
     return {
       total: jobNames.length,
       jobs: jobNames.map((name) => {
-        const job = jobs.get(name);
+        const job = jobs.get(name) as any;
         return {
           name,
-          running: job.running,
-          nextDate: job.nextDate().toISOString(),
+          running: job?.running || false,
+          nextDate: job?.nextDate?.().toISOString?.() || null,
         };
       }),
     };

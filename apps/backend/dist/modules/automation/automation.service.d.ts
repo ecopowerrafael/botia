@@ -9,31 +9,11 @@ export declare class AutomationService {
     constructor(prisma: PrismaService, whatsappService: WhatsAppService);
     createDripCampaign(dto: CreateDripCampaignDto): Promise<{
         success: boolean;
-        schedule: {
-            id: string;
-            name: string;
-            createdAt: Date;
-            tenantId: string;
-            status: import("@prisma/client").$Enums.ScheduleStatus;
-            type: import("@prisma/client").$Enums.ScheduleType;
-            target: string;
-            payload: import("@prisma/client/runtime/client").JsonValue;
-            runAt: Date;
-        };
+        schedule: any;
     }>;
     createMassCampaign(dto: CreateMassCampaignDto): Promise<{
         success: boolean;
-        schedule: {
-            id: string;
-            name: string;
-            createdAt: Date;
-            tenantId: string;
-            status: import("@prisma/client").$Enums.ScheduleStatus;
-            type: import("@prisma/client").$Enums.ScheduleType;
-            target: string;
-            payload: import("@prisma/client/runtime/client").JsonValue;
-            runAt: Date;
-        };
+        schedule: any;
         totalContacts: number;
     }>;
     private scheduleDripCampaign;
@@ -52,37 +32,17 @@ export declare class AutomationService {
         success: boolean;
         message: string;
     }>;
-    listCampaigns(tenantId: string, type?: string, status?: string): Promise<{
-        id: string;
-        name: string;
-        createdAt: Date;
-        tenantId: string;
-        status: import("@prisma/client").$Enums.ScheduleStatus;
-        type: import("@prisma/client").$Enums.ScheduleType;
-        target: string;
-        payload: import("@prisma/client/runtime/client").JsonValue;
-        runAt: Date;
-    }[]>;
-    getCampaign(scheduleId: string, tenantId: string): Promise<{
-        id: string;
-        name: string;
-        createdAt: Date;
-        tenantId: string;
-        status: import("@prisma/client").$Enums.ScheduleStatus;
-        type: import("@prisma/client").$Enums.ScheduleType;
-        target: string;
-        payload: import("@prisma/client/runtime/client").JsonValue;
-        runAt: Date;
-    }>;
+    listCampaigns(tenantId: string, type?: string, status?: string): Promise<any>;
+    getCampaign(scheduleId: string, tenantId: string): Promise<any>;
     getCampaignStats(scheduleId: string, tenantId: string): Promise<{
         campaignId: string;
-        type: import("@prisma/client").$Enums.ScheduleType;
-        name: string;
-        status: import("@prisma/client").$Enums.ScheduleStatus;
+        type: any;
+        name: any;
+        status: any;
         totalContacts: any;
         sentCount: any;
         failedCount: any;
         successRate: string;
-        createdAt: Date;
+        createdAt: any;
     }>;
 }

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { BullModule as NestBullModule } from '@nestjs/bull';
+import { BullModule as NestBullMQModule } from '@nestjs/bullmq';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 /**
@@ -22,7 +22,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 @Module({
   imports: [
     ConfigModule,
-    NestBullModule.forRootAsync({
+    NestBullMQModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
@@ -33,61 +33,36 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         const redisDb = configService.get('REDIS_DB', 0);
 
         return {
-          redis: {
+          connection: {
             host: redisHost,
             port: parseInt(String(redisPort), 10),
             password: redisPassword || undefined,
             db: parseInt(String(redisDb), 10),
-          },
-          // Queue settings
-          settings: {
-            // Default job options
-            defaultJobOptions: {
-              // Attempts antes de falhar
-              attempts: 3,
-              // Delay entre tentativas (em ms)
-              backoff: {
-                type: 'exponential',
-                delay: 2000, // 2s inicial
-              },
-              // Remover job após completar (em ms)
-              removeOnComplete: {
-                age: 3600, // 1 hora
-              },
-              // Remover job após falhar (em ms)
-              removeOnFail: {
-                age: 86400, // 24 horas (keep for debugging)
-              },
-            },
-            // Workers
-            maxStalledCount: 2, // Max stalled retries
-            lockDuration: 30000, // Lock duration em ms
-            lockRenewTime: 15000, // Lock renew interval
           },
         };
       },
     }),
 
     // Audio processing queue
-    NestBullModule.registerQueue({
+    NestBullMQModule.registerQueue({
       name: 'audio',
     }),
 
     // Notification queue
-    NestBullModule.registerQueue({
+    NestBullMQModule.registerQueue({
       name: 'notification',
     }),
 
     // Cleanup queue
-    NestBullModule.registerQueue({
+    NestBullMQModule.registerQueue({
       name: 'cleanup',
     }),
 
     // WordPress sync queue
-    NestBullModule.registerQueue({
+    NestBullMQModule.registerQueue({
       name: 'sync',
     }),
   ],
-  exports: [NestBullModule],
+  exports: [NestBullMQModule],
 })
 export class BullQueueModule {}

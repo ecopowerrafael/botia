@@ -1,5 +1,5 @@
 import { IsString, IsNumber, IsOptional, IsEnum } from 'class-validator';
-import { AudioStatus } from '@prisma/client';
+import { AudioStatus } from '../../../shared/enums';
 
 export class ReceiveAudioDto {
   @IsString()

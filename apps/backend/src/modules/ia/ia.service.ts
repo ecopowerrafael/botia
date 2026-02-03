@@ -50,7 +50,7 @@ export class IAService {
 
     // Filtro simples por relevância (pode ser melhorado com full-text search)
     return products.filter(
-      (p) =>
+      (p: any) =>
         p.name.toLowerCase().includes(query.toLowerCase()) ||
         p.category.toLowerCase().includes(query.toLowerCase()),
     );
@@ -81,7 +81,7 @@ export class IAService {
 
     // Verificar se tem API key configurada (não necessária para Ollama)
     if (provider !== AIProvider.OLLAMA) {
-      const apiKey = tenant.apiKeys.find((k) => k.type === provider.toUpperCase());
+      const apiKey = tenant.apiKeys.find((k: any) => k.type === provider.toUpperCase());
 
       if (!apiKey) {
         throw new HttpException(
@@ -108,7 +108,7 @@ export class IAService {
       );
       if (wpProducts.length > 0) {
         wpContext = `\n\nProdutos do WordPress encontrados:\n${wpProducts
-          .map((p) => `- ${p.name} (R$ ${p.price}): ${p.description}`)
+          .map((p: any) => `- ${p.name} (R$ ${p.price}): ${p.description}`)
           .join('\n')}`;
       }
     } catch (error) {
@@ -118,7 +118,7 @@ export class IAService {
     // Preparar contexto com produtos
     const productContext =
       products.length > 0
-        ? `\n\nProdutos do banco local:\n${products.map((p) => `- ${p.name} (${p.category}): ${p.url || 'sem link'}`).join('\n')}`
+        ? `\n\nProdutos do banco local:\n${products.map((p: any) => `- ${p.name} (${p.category}): ${p.url || 'sem link'}`).join('\n')}`
         : '';
 
     const systemMessage = `${systemPrompt || 'Você é um assistente de vendas prestativo e profissional.'} ${productContext}${wpContext}`;
@@ -309,7 +309,7 @@ export class IAService {
       take: limit,
     });
 
-    return messages.reverse().map((m) => ({
+    return messages.reverse().map((m: any) => ({
       role: m.type === 'BOT' ? 'assistant' : 'user',
       content: m.content,
     }));
@@ -330,8 +330,8 @@ export class IAService {
 
     return {
       tenantId,
-      hasOpenAI: tenant.apiKeys.some((k) => k.type === 'OPENAI'),
-      hasGemini: tenant.apiKeys.some((k) => k.type === 'GEMINI'),
+      hasOpenAI: tenant.apiKeys.some((k: any) => k.type === 'OPENAI'),
+      hasGemini: tenant.apiKeys.some((k: any) => k.type === 'GEMINI'),
     };
   }
 }

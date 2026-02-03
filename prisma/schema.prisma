@@ -333,6 +333,7 @@ model UserPreferences {
   
   notificationEmail Boolean  @default(true)
   notificationSMS   Boolean  @default(false)
+  notificationsEnabled Boolean @default(true)
   
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
@@ -485,7 +486,12 @@ model TTSCache {
   
   audioPath       String
   audioUrl        String
+  audioFormat     String?
   duration        Int
+    originalText    String?
+    voice           String?
+    hitCount        Int      @default(0)
+    createdAt       DateTime @default(now())
   
   provider        String
   generatedAt     DateTime @default(now())
@@ -502,6 +508,7 @@ model TenantWhatsAppConfig {
   
   vendorPhoneNumber     String
   vendorPhoneName       String?
+  vendorInstanceKey     String?
   
   autoSendOrder         Boolean  @default(true)
   includePaymentProof   Boolean  @default(true)

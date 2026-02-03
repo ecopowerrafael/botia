@@ -8,29 +8,13 @@ export declare class WhatsAppService {
     private evolutionApi;
     constructor(prisma: PrismaService, iaService: IAService);
     createInstance(dto: CreateInstanceDto): Promise<{
-        instance: {
-            id: string;
-            name: string;
-            createdAt: Date;
-            updatedAt: Date;
-            tenantId: string;
-            status: string;
-            instanceKey: string;
-        };
+        instance: any;
         qrcode: any;
         instanceKey: string;
     }>;
     connectInstance(dto: ConnectInstanceDto): Promise<{
         status: string;
-        instance: {
-            id: string;
-            name: string;
-            createdAt: Date;
-            updatedAt: Date;
-            tenantId: string;
-            status: string;
-            instanceKey: string;
-        };
+        instance: any;
         message?: undefined;
     } | {
         status: string;
@@ -47,22 +31,6 @@ export declare class WhatsAppService {
     processWebhook(payload: WebhookPayloadDto): Promise<void>;
     private handleIncomingMessage;
     private handleMessageStatus;
-    listInstances(tenantId: string): Promise<{
-        id: string;
-        name: string;
-        createdAt: Date;
-        updatedAt: Date;
-        tenantId: string;
-        status: string;
-        instanceKey: string;
-    }[]>;
-    getInstance(tenantId: string, instanceKey: string): Promise<{
-        id: string;
-        name: string;
-        createdAt: Date;
-        updatedAt: Date;
-        tenantId: string;
-        status: string;
-        instanceKey: string;
-    } | null>;
+    listInstances(tenantId: string): Promise<any>;
+    getInstance(tenantId: string, instanceKey: string): Promise<any>;
 }

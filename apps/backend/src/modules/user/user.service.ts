@@ -1,7 +1,7 @@
 import { Injectable, BadRequestException, ConflictException } from '@nestjs/common';
 import { PrismaService } from '../../shared/prisma.service';
 import { UserCreateDto, UserPreferencesDto, UserResponseDto } from './dto/user.dto';
-import { UserStatus, UserRole, VendorMode } from '@prisma/client';
+import { UserStatus, UserRole, VendorMode } from '../../shared/enums';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()

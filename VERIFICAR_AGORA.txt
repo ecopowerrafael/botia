@@ -1,0 +1,25 @@
+# COMANDO PARA EXECUTAR NO TERMINAL DA HOSTINGER
+
+Execute isto para ver o ERRO COMPLETO:
+
+```bash
+docker logs botia-backend
+```
+
+Me manda TODO o output disso, incluindo as primeiras linhas de erro.
+
+---
+
+Enquanto isso, vou checar se o arquivo existe:
+
+```bash
+ls -la /var/www/botia/apps/backend/dist/main.js
+```
+
+```bash
+cat /var/www/botia/prisma/schema.prisma | grep "datasource"
+```
+
+Se o schema.prisma não tiver `datasource { url = env("DATABASE_URL") }`, é o problema.
+
+Compartilha os 3 comandos acima comigo!

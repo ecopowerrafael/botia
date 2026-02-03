@@ -8,11 +8,11 @@ export declare class WordPressController {
     }): Promise<{
         success: boolean;
         integration: {
-            id: string;
-            siteUrl: string;
-            isActive: boolean;
-            syncProducts: boolean;
-            lastSyncedAt: Date | null;
+            id: any;
+            siteUrl: any;
+            isActive: any;
+            syncProducts: any;
+            lastSyncedAt: any;
         };
     }>;
     configureFields(integrationId: string, dto: ConfigureFieldsDto & {
@@ -21,9 +21,9 @@ export declare class WordPressController {
         success: boolean;
         fields: any;
         sync: {
-            products: boolean;
-            posts: boolean;
-            pages: boolean;
+            products: any;
+            posts: any;
+            pages: any;
         };
     }>;
     syncData(integrationId: string, dto: SyncDataDto & {
@@ -38,28 +38,8 @@ export declare class WordPressController {
         };
         message: string;
     }>;
-    listIntegrations(tenantId: string): Promise<{
-        id: string;
-        createdAt: Date;
-        siteUrl: string;
-        syncProducts: boolean;
-        syncPosts: boolean;
-        syncPages: boolean;
-        isActive: boolean;
-        lastSyncedAt: Date | null;
-    }[]>;
-    getIntegration(integrationId: string, tenantId: string): Promise<{
-        productFields: any;
-        id: string;
-        createdAt: Date;
-        siteUrl: string;
-        syncProducts: boolean;
-        syncPosts: boolean;
-        syncPages: boolean;
-        syncFrequency: number;
-        isActive: boolean;
-        lastSyncedAt: Date | null;
-    }>;
+    listIntegrations(tenantId: string): Promise<any>;
+    getIntegration(integrationId: string, tenantId: string): Promise<any>;
     disableIntegration(integrationId: string, tenantId: string): Promise<{
         success: boolean;
         message: string;

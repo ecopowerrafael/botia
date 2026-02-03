@@ -1,5 +1,5 @@
 import { IsString, IsNumber, IsOptional, IsEnum, IsDecimal } from 'class-validator';
-import { VendorMode } from '@prisma/client';
+import { VendorMode } from '../../../shared/enums';
 
 export class AddItemDto {
   @IsString()

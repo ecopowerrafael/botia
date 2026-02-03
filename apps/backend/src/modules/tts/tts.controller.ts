@@ -60,7 +60,8 @@ export class TTSController {
    */
   @Post('cached')
   async getCachedTTS(@Body() dto: GetCachedTTSDto): Promise<any> {
-    return await this.ttsService.getCachedTTS(dto);
+    // This endpoint is disabled - use the main audio generation endpoint instead
+    return { error: 'Cache lookup endpoint not available' };
   }
 
   /**

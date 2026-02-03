@@ -8,20 +8,20 @@ export declare class WordPressService {
     connectWordPress(tenantId: string, dto: ConnectWordPressDto): Promise<{
         success: boolean;
         integration: {
-            id: string;
-            siteUrl: string;
-            isActive: boolean;
-            syncProducts: boolean;
-            lastSyncedAt: Date | null;
+            id: any;
+            siteUrl: any;
+            isActive: any;
+            syncProducts: any;
+            lastSyncedAt: any;
         };
     }>;
     configureFields(tenantId: string, dto: ConfigureFieldsDto): Promise<{
         success: boolean;
         fields: any;
         sync: {
-            products: boolean;
-            posts: boolean;
-            pages: boolean;
+            products: any;
+            posts: any;
+            pages: any;
         };
     }>;
     syncData(tenantId: string, dto: SyncDataDto): Promise<{
@@ -35,34 +35,9 @@ export declare class WordPressService {
         message: string;
     }>;
     private saveWordPressProduct;
-    getProductsForAIContext(tenantId: string, query: string, limit?: number): Promise<{
-        name: string;
-        price: number | null;
-        description: string | null;
-        categories: any;
-    }[]>;
-    listIntegrations(tenantId: string): Promise<{
-        id: string;
-        createdAt: Date;
-        siteUrl: string;
-        syncProducts: boolean;
-        syncPosts: boolean;
-        syncPages: boolean;
-        isActive: boolean;
-        lastSyncedAt: Date | null;
-    }[]>;
-    getIntegration(integrationId: string, tenantId: string): Promise<{
-        productFields: any;
-        id: string;
-        createdAt: Date;
-        siteUrl: string;
-        syncProducts: boolean;
-        syncPosts: boolean;
-        syncPages: boolean;
-        syncFrequency: number;
-        isActive: boolean;
-        lastSyncedAt: Date | null;
-    }>;
+    getProductsForAIContext(tenantId: string, query: string, limit?: number): Promise<any>;
+    listIntegrations(tenantId: string): Promise<any>;
+    getIntegration(integrationId: string, tenantId: string): Promise<any>;
     disableIntegration(integrationId: string, tenantId: string): Promise<{
         success: boolean;
         message: string;
